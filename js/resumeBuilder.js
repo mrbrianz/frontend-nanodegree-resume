@@ -48,7 +48,7 @@ onlineCourses: array with
 display: function
 */
 
-var education {
+var education = {
 	"schools": [
 		{
 			"name" : "MCC",
@@ -90,7 +90,7 @@ jobs: array of objects with
 display: function
 */
 
-var work {
+var work = {
 	"jobs": [
 	{
 		"employer" : "Self-employed",
@@ -121,7 +121,7 @@ projects: array of objects with
 display: function
 */
 
-var projects {
+var projects = {
 	"projects": [
 	{
 		"title" : "Nexus",
