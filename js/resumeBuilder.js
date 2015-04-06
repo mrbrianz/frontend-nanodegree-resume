@@ -67,39 +67,76 @@ var education = {
 var work = {
 	"jobs": [
 	{
+		"employer" : "AT&T",
+		"title" : "Web Developer",
+		"location" : "Austin, TX",
+		"dates" : "2000-Present",
+		"description" : "Build, maintain, and develope internal web systems for use by employees."
+
+	},
+	{
 		"employer" : "Self-employed",
 		"title" : "Website Developer",
 		"location" : "Waco, TX",
 		"dates" : "1999-2000",
 		"description" : "Built websites for various companies who wished to have a web presence."
-	},
-	{
-		"employer" : "AT&T",
-		"title" : "Web Developer",
-		"location" : "Austin, TX",
-		"dates" : "2000-2015",
-		"description" : "Build, maintain, and develope internal web systems for use by employees."
-
 	}
 	]
 };
 
+
+/* 	=============================================
+	Projects Object, containing display function
+	=============================================  */
+
 var projects = {
 	"projects": [
+	{
+		"title" : "myWorkLife Mobile",
+		"dates" : "2012-Present",
+		"description" : "Managed and contributed to a mobile version of the Nexus project.",
+		"images" : ["images/mwl1.jpg","images/mwl2.jpg"]
+	},
 	{
 		"title" : "Nexus",
 		"dates" : "2002-2013",
 		"description" : "Built series of progressive improvements to a system used for managing employees.",
 		"images" : ["images/nexus1.jpg","images/nexus2.jpg"]
-	},
-	{
-		"title" : "myWorkLife Mobile",
-		"dates" : "2012-2015",
-		"description" : "Managed and contributed to a mobile version of the Nexus project.",
-		"images" : ["images/mwl1.jpg","images/mwl2.jpg"]
 	}
-	]
+	],
+	// create a function encapsulated in projects.display
+	display : function() {
+		// use 'for in' loop for all "projects" in the projects object
+		// loop for all projects.projects, using projectItemNumber as the index
+		for (projectItemNumber in projects.projects) {
+		// append HTMLprojectStart from helper.js to to add project-entry class div
+		$("#projects").append(HTMLprojectStart);
 
+		// set formatted var by taking HTMLprojectTitle from helper.js and replacing %data% with the projects projects itemNumber title
+		var formattedProjectTitle = HTMLprojectTitle.replace("%data%", projects.projects[projectItemNumber].title);
+		// append this formatted var to the project-entry class, last element
+		$(".project-entry:last").append(formattedProjectTitle);
+
+		// repeat for dates
+		var formattedProjectDates = HTMLprojectDates.replace("%data%", projects.projects[projectItemNumber].dates);
+		$(".project-entry:last").append(formattedProjectDates);
+
+		// repeat for description
+		var formattedProjectDescription = HTMLprojectDescription.replace("%data%", projects.projects[projectItemNumber].description);
+		$(".project-entry:last").append(formattedProjectDescription);
+
+		// the images are in an array
+		// check if there are images
+			// normal loop checking for images having length
+			if (projects.projects[projectItemNumber].images.length > 0) {
+				// use 'for in' loop for all images in this projects projects itemNumber images
+				for (imageItemNumber in projects.projects[projectItemNumber].images) {
+					var formattedProjectImage = HTMLprojectImage.replace("%data%", projects.projects[projectItemNumber].images[imageItemNumber]);
+					$(".project-entry:last").append(formattedProjectImage);
+				};
+			};
+		};
+	}
 };
 
 /* ------------------------------------------
@@ -152,12 +189,11 @@ function displayWork() {
 		$(".work-entry:last").append(formattedDescription);
 	};
 };
-// invoke displayWork function
-displayWork();
 
-/* -----------------------
+
+/*	===================
 	Capture page clicks
-	---------------------- */
+	===================  */
 
 // grab document, and on click run function loc, which is an event object and has various properties we can set as variables and then pass those to the console
 $(document).click(function(loc) {
@@ -171,9 +207,9 @@ $(document).click(function(loc) {
 });
 
 
-/* --------------
+/*	============
 	Locationizer
-	-------------  */
+	============  */
 
 function locationizer(work) { // can also be 'work_obj'
     // create empty array
@@ -195,9 +231,10 @@ function locationizer(work) { // can also be 'work_obj'
 // Did locationizer() work? This line will tell you!
 console.log(locationizer(work));
 
-/* --------------------------
+
+/*	=========================
 	Internationalize Function
-	------------------------- */
+	=========================  */
 
 // function to use the internationalize button option, if pressed will send call to this function
 function inName(theIncomingName) {
@@ -215,60 +252,21 @@ function inName(theIncomingName) {
     return nameArray[0] +" "+nameArray[1];
 };
 
-// append InternationalizeButton to main
-$('#main').append(internationalizeButton);
 
+/*  ====================
+	Call to Display Page
+	====================  */
 
-/* ------------------
-	Display Projects
-	----------------- */
-
-// create a function encapsulated in projects.display
-projects.display = function() {
-	// use 'for in' loop for all "projects" in the projects object
-	// loop for all projects.projects, using projectItemNumber as the index
-	for (projectItemNumber in projects.projects) {
-	// append HTMLprojectStart from helper.js to to add project-entry class div
-	$("#projects").append(HTMLprojectStart);
-
-	// set formatted var by taking HTMLprojectTitle from helper.js and replacing %data% with the projects projects itemNumber title
-	var formattedProjectTitle = HTMLprojectTitle.replace("%data%", projects.projects[projectItemNumber].title);
-	// append this formatted var to the project-entry class, last element
-	$(".project-entry:last").append(formattedProjectTitle);
-
-	// repeat for dates
-	var formattedProjectDates = HTMLprojectDates.replace("%data%", projects.projects[projectItemNumber].dates);
-	$(".project-entry:last").append(formattedProjectDates);
-
-	// repeat for description
-	var formattedProjectDescription = HTMLprojectDescription.replace("%data%", projects.projects[projectItemNumber].description);
-	$(".project-entry:last").append(formattedProjectDescription);
-
-	// the images are in an array
-	// check if there are images
-		// normal loop checking for images having length
-		if (projects.projects[projectItemNumber].images.length > 0) {
-			// use 'for in' loop for all images in this projects projects itemNumber images
-			for (imageItemNumber in projects.projects[projectItemNumber].images) {
-				var formattedProjectImage = HTMLprojectImage.replace("%data%", projects.projects[projectItemNumber].images[imageItemNumber]);
-				$(".project-entry:last").append(formattedProjectImage);
-			};
-		};
-	};
+displayBrianResume = function() {
+	// invoke displayWork function
+	displayWork();
+	// invoke projects display
+	projects.display();
+	// append InternationalizeButton to main
+	$('#main').append(internationalizeButton);
+	// append googleMap to the page
+	$("#mapDiv").append(googleMap);
 };
-// invoke projects display
-projects.display();
 
-
-$("#mapDiv").append(googleMap);
-
-
-
-
-
-
-
-
-
-
-
+// invoke the display of this resume
+displayBrianResume();
