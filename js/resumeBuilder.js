@@ -1,56 +1,76 @@
-/* ------------
-	Name + Role
-	------------ */
-
-// attach name + role to vars
-var name = "Brian Zuehlke";
-var role = "Web Developer";
-
-// set formatted vars using helper.js pre-fabbed elements, but replace %data% with the vars
-var formattedName = HTMLheaderName.replace("%data%", name);
-var formattedRole = HTMLheaderRole.replace("%data%", role);
-
-// prepend formatted vars to header id
-// We back in the header info, because we want it to prepend to the other tags in the id header (before the unordered list 'ul')
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
-
-
-/* -------------------------------------------------------------
-	bio, eduction, work, and projects objects containing my info
-	------------------------------------------------------------  */
-
 var bio = {
 	"name" : "Brian Zuehlke",
-	"role" : "Web Developer",
+	"role" : "Web Developer, Extraordinaire",
 	"contacts" : {
 		"mobile" : "512-xxx-xxxx",
 		"email" : "mxxxxxx@xx",
 		"github" : "mrbrianz",
-		"twitter" : "mrbrianz",
+		"blog" : "mrbrianz.com",
 		"location" : "Austin, TX"
 	},
-	"welcomeMessage" : "Howdy Partners",
+	"welcomeMessage" : "The one you really want to hire.  Today!",
 	"skills" : ["Awesomeness", "Programming", "Mobile Web", "JavaScript"],
-	"bioPic": "images/me.jpg"
+	"bioPic": "images/me.jpg",
+	display : function() {
+
+		// set formatted vars using helper.js pre-fabbed elements, but replace %data% with the vars
+		var formattedName = HTMLheaderName.replace("%data%", bio.name);
+		var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+		var formattedBioPic = HTMLbioPic.replace("%data%", bio.bioPic);
+		var formattedwelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+		var formattedmobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+		var formattedemail = HTMLemail.replace("%data%", bio.contacts.email);
+		var formattedgithub = HTMLgithub.replace("%data%", bio.contacts.github);
+		var formattedblog = HTMLblog.replace("%data%", bio.contacts.blog);
+		var formattedlocation = HTMLlocation.replace("%data%", bio.contacts.location);
+
+		// prepend formatted vars to header id
+		// We back in the header info, because we want it to prepend to the other tags in the id header (before the unordered list 'ul')
+		$("#header").prepend(formattedRole);
+		$("#header").prepend(formattedName);
+		$("#header").append(formattedBioPic);
+		$("#header").append(formattedwelcomeMsg);
+
+
+		$("#topContacts").append(formattedmobile,formattedemail,formattedgithub,formattedblog,formattedlocation);
+		$("#footerContacts").append(formattedmobile,formattedemail,formattedgithub,formattedblog,formattedlocation);
+
+		/* ------------------------------------------
+			Display Skills on page, in unordered list
+			-----------------------------------------  */
+
+		// USING for IN loops (method 3)
+		// example: for(*index* in object/array) {dosomething()};
+
+		// grab header id, append the variable HTMLskillsStart from helper.js
+		$("#header").append(HTMLskillsStart);
+
+		for(nextSkillItem in bio.skills) {
+				// set the var formatted skill to HTMLskills from helper.js, but replace %data% with skills item X (x = nextSkillItem variable)
+				var formattedSkill = HTMLskills.replace("%data%", bio.skills[nextSkillItem]);
+				// grab skills id, append the formattedSkill variable to it
+				$("#skills").append(formattedSkill);
+		};
+
+	}
 };
 
 var education = {
 	"schools": [
 		{
-			"name" : "MCC",
+			"name" : "McLennan Community College (yes, just like the tv show 'Community' except funnier)",
 			"location" : "Waco, TX",
-			"degree" : "BBA",
-			"majors" : ["n/a"],
-			"dates" : 1997,
+			"degree" : "BBA Transfer",
+			"majors" : "n/a",
+			"dates" : "1995-1997",
 			"url" : "http://www.mclennan.edu"
 		},
 		{
-			"name" : "Baylor",
+			"name" : "Baylor University",
 			"location" : "Waco, TX",
 			"degree" : "BBA",
 			"majors" : ["Entrepreneurship","International Business"],
-			"dates" : 1999,
+			"dates" : "1997-1999",
 			"url" : "http://www.baylor.edu"
 		}
 	],
@@ -61,7 +81,30 @@ var education = {
 			"dates" : 2015,
 			"url" : "http://www.udacity.com"
 		}
-	]
+	],
+	display : function() {
+		for (schoolitem in education.schools) {
+			$("#education").append(HTMLschoolStart);
+
+			var formattedschoolName = HTMLschoolName.replace("%data%", education.schools[schoolitem].name);
+			var formattedschoolDegree = HTMLschoolDegree.replace("%data%", education.schools[schoolitem].degree);
+			var formattedschoolDates = HTMLschoolDates.replace("%data%", education.schools[schoolitem].dates);
+			var formattedschoolLocation = HTMLschoolLocation.replace("%data%", education.schools[schoolitem].location);
+			var formattedschoolMajor = HTMLschoolMajor.replace('%data%', education.schools[schoolitem].majors);
+
+			$(".education-entry:last").append(formattedschoolName,formattedschoolDegree,formattedschoolDates,formattedschoolLocation,formattedschoolMajor);
+		};
+
+		$(".education-entry:last").append(HTMLonlineClasses);
+
+		for (onlineItem in education.onlineCourses) {
+			var formattedonlineTitle = HTMLonlineTitle.replace('%data%', education.onlineCourses[onlineItem].title) + HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineItem].school);
+			var formattedonlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[onlineItem].dates);
+			var formattedonlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[onlineItem].url);
+
+			$(".education-entry:last").append(formattedonlineTitle,formattedonlineDates,formattedonlineURL);
+		};
+	}
 };
 
 var work = {
@@ -80,8 +123,43 @@ var work = {
 		"location" : "Waco, TX",
 		"dates" : "1999-2000",
 		"description" : "Built websites for various companies who wished to have a web presence."
+	},
+	{
+		"employer" : "Madagascar United",
+		"title" : "Wildlife Documentary Filmmaker",
+		"location" : "Fianarantsoa, Madagascar",
+		"dates" : "1997-1999",
+		"description" : "Filmed several extraordinary films which were never released.  Also this expands the Google Map so that it looks like I have traveled the world!"
 	}
-	]
+	],
+	// create displayWork function containing our 'for in' loop which displays our work section
+	display : function() {
+		for (jobItemNumber in work.jobs ) {
+
+			// grab workExperience and append HTMLworkstart to it from helper.js
+		 	$("#workExperience").append(HTMLworkStart);
+
+		 	// set var formattedEmployer as HTMLworkEmployer from helper.js but replace %data% with work job x, x being the jobItemNumber index being used in this 'for in loop' and use the employee value
+		 	var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[jobItemNumber].employer);
+		 	// do same, but for Title
+		 	var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[jobItemNumber].title);
+		 	// Concatenate the two vars into one new var
+			var formattedEmployerTitle = formattedEmployer + formattedTitle;
+
+			var formattedWorkDates = HTMLworkDates.replace("%data%", work.jobs[jobItemNumber].dates);
+			var formattedWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[jobItemNumber].location);
+			var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[jobItemNumber].description);
+
+			// grabbing all class work-entry, grabbing the last one, and appending the concatenated var
+			$(".work-entry:last").append(formattedEmployerTitle);
+			// same for location
+			$(".work-entry:last").append(formattedWorkLocation);
+			// same for dates
+			$(".work-entry:last").append(formattedWorkDates);
+			// same for descriptions
+			$(".work-entry:last").append(formattedDescription);
+		};
+	}
 };
 
 
@@ -137,57 +215,6 @@ var projects = {
 			};
 		};
 	}
-};
-
-/* ------------------------------------------
-	Display Skills on page, in unordered list
-	-----------------------------------------  */
-
-// USING for IN loops (method 3)
-// example: for(*index* in object/array) {dosomething()};
-
-// grab header id, append the variable HTMLskillsStart from helper.js
-$("#header").append(HTMLskillsStart);
-
-for(NextSkillItem in bio.skills) {
-		// set the var formatted skill to HTMLskills from helper.js, but replace %data% with skills item X (x = NextSkillItem variable)
-		var formattedSkill = HTMLskills.replace("%data%", bio.skills[NextSkillItem]);
-		// grab skills id, append the formattedSkill variable to it
-		$("#skills").append(formattedSkill);
-};
-
-
-/* --------------------------------------------
-	displayWork Function to diplay work section
-	------------------------------------------- */
-
-// create displayWork function containing our 'for in' loop which displays our work section
-function displayWork() {
-	for (jobItemNumber in work.jobs ) {
-
-		// grab workExperience and append HTMLworkstart to it from helper.js
-	 	$("#workExperience").append(HTMLworkStart);
-
-	 	// set var formattedEmployer as HTMLworkEmployer from helper.js but replace %data% with work job x, x being the jobItemNumber index being used in this 'for in loop' and use the employee value
-	 	var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[jobItemNumber].employer);
-	 	// do same, but for Title
-	 	var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[jobItemNumber].title);
-	 	// Concatenate the two vars into one new var
-		var formattedEmployerTitle = formattedEmployer + formattedTitle;
-
-		var formattedWorkDates = HTMLworkDates.replace("%data%", work.jobs[jobItemNumber].dates);
-		var formattedWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[jobItemNumber].location);
-		var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[jobItemNumber].description);
-
-		// grabbing all class work-entry, grabbing the last one, and appending the concatenated var
-		$(".work-entry:last").append(formattedEmployerTitle);
-		// same for location
-		$(".work-entry:last").append(formattedWorkLocation);
-		// same for dates
-		$(".work-entry:last").append(formattedWorkDates);
-		// same for descriptions
-		$(".work-entry:last").append(formattedDescription);
-	};
 };
 
 
@@ -258,10 +285,14 @@ function inName(theIncomingName) {
 	====================  */
 
 displayBrianResume = function() {
-	// invoke displayWork function
-	displayWork();
+	// invoke work display
+	work.display();
+	// invoke education display
+	education.display();
 	// invoke projects display
 	projects.display();
+	// invoke bio display
+	bio.display();
 	// append InternationalizeButton to main
 	$('#main').append(internationalizeButton);
 	// append googleMap to the page
