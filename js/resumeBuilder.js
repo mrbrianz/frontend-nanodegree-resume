@@ -27,6 +27,7 @@ var bio = {
 		var formattedRole       = HTMLheaderRole.replace("%data%", bio.role);
 		var formattedBioPic     = HTMLbioPic.replace("%data%", bio.bioPic);
 		var formattedwelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
+		// global replacements (/g), due to using links within these vars
 		var formattedmobile     = HTMLmobile.replace(/%data%/g, bio.contacts.mobile);
 		var formattedemail      = HTMLemail.replace(/%data%/g, bio.contacts.email);
 		var formattedgithub     = HTMLgithub.replace(/%data%/g, bio.contacts.github);
@@ -37,6 +38,7 @@ var bio = {
 		$("#header").prepend(formattedRole);
 		$("#header").prepend(formattedPronounce);
 		$("#header").prepend(formattedName);
+
 		// append the rest
 		$("#header").append(formattedBioPic,formattedwelcomeMsg);
 		// contacts append
@@ -66,6 +68,7 @@ var education = {
 			"degree" : "Bachelors of Business Administration (BBA)",
 			"majors" : ["Entrepreneurship"," International Business"],
 			"dates" : "1997-1999",
+			// url added, in order to have a click on the school name goto a url
 			"url" : "http://www.baylor.edu"
 		},
 		{
@@ -74,6 +77,7 @@ var education = {
 			"degree" : "Bachelors of Business Administration (BBA) - Transfer",
 			"majors" : "Transferred to Baylor University",
 			"dates" : "1995-1997",
+			// url added, in order to have a click on the school name goto a url
 			"url" : "http://www.mclennan.edu"
 		}
 	],
@@ -93,6 +97,7 @@ var education = {
 
 			// set formatted vars
 			var formattedschoolName 	= HTMLschoolName.replace("%data%", education.schools[schoolitem].name);
+			// use url as the link for the school name
 			var formattedschoolName 	= formattedschoolName.replace("#", education.schools[schoolitem].url);
 
 			var formattedschoolDegree 	= HTMLschoolDegree.replace("%data%", education.schools[schoolitem].degree);
@@ -110,6 +115,7 @@ var education = {
 		for (onlineItem in education.onlineCourses) {
 			// set formatted vars
 			var formattedonlineTitle 	= HTMLonlineTitle.replace('%data%', education.onlineCourses[onlineItem].title) + HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineItem].school);
+			// use url as the link
 			var formattedonlineTitle 	= formattedonlineTitle.replace("#", education.onlineCourses[onlineItem].url);
 
 			var formattedonlineDates 	= HTMLonlineDates.replace("%data%", education.onlineCourses[onlineItem].dates);
@@ -132,6 +138,7 @@ var work = {
 		"location" : "Austin, TX",
 		"dates" : "2009-Present",
 		"description" : "Responsible for design, development, testing and documentation of the coding and jobs necessary to support management initiatives. Understands computer center infrastructure and environments, tools, and processes; assists with production including loads, source, job scheduling data sets and scripts. Works on several or all technical phases of operations. Ability to employ production system utilities and produce software in one or more programming languages. Directs compilation of records and reports concerning production, machine malfunctioning and maintenance. Possesses and applies a broad knowledge of principles, practices, and procedures to the completion of assignments. Works with minimum supervision. May advise on organizational, procedural, and work flow plans, methods, and procedures analysis. Analyzes the results of monitoring the operating systems and recommends changes to improve processing and utilization. ",
+		// url added, in order to have a click on the work name goto a url
 		"url" : "http://www.att.com/"
 
 	},
@@ -141,6 +148,7 @@ var work = {
 		"location" : "Austin, TX",
 		"dates" : "2000-2009",
 		"description" : "Provided management of scheduling systems and progressively grew the systems into a Web Application for the benefit of the Austin Call Center, and later to the larger overall company.",
+		// url added, in order to have a click on the work name goto a url
 		"url" : "http://www.att.com/"
 	},
 	{
@@ -149,6 +157,7 @@ var work = {
 		"location" : "Waco, TX",
 		"dates" : "1999-2000",
 		"description" : "Created, developed, and maintained business websites for local businesses. Self-employment involved compliance with all laws, ordinances, and taxes necessary for the operation of a business.",
+		// url added, in order to have a click on the work name goto a url
 		"url" : "http://bing.com/search?q=waco+tx+web+developer"
 	},
 	{
@@ -157,6 +166,7 @@ var work = {
 		"location" : "Fianarantsoa, Madagascar",
 		"dates" : "1997-1999",
 		"description" : "Directed and Produced several extraordinary films which were never released.  This work experience expands the Google Map so that it looks like I have traveled the world!",
+		// url added, in order to have a click on the work name goto a url
 		"url" : "http://bing.com/search?q=madagascar"
 	}
 	],
@@ -169,10 +179,13 @@ var work = {
 
 		 	// set formatted vars
 		 	var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[jobItemNumber].employer);
+		 	// use url as the link
 		 	var formattedEmployer = formattedEmployer.replace("#", work.jobs[jobItemNumber].url);
 
 		 	var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[jobItemNumber].title);
+			// concat employer and title
 			var formattedEmployerTitle = formattedEmployer + formattedTitle;
+
 			var formattedWorkDates = HTMLworkDates.replace("%data%", work.jobs[jobItemNumber].dates);
 			var formattedWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[jobItemNumber].location);
 			var formattedDescription = HTMLworkDescription.replace('%data%', work.jobs[jobItemNumber].description);
@@ -192,6 +205,7 @@ var projects = {
 		"dates" : "2012-Present",
 		"description" : "Managed and contributed to a mobile version of the Nexus project.  This allowed users of the product to interact with the website from their mobile devices.",
 		"images" : ["images/mwl1.jpg","images/mwl2.jpg"],
+		// url added, in order to have a click on the project name goto a url
 		"url" : "http://att.com/myworklife/"
 	},
 	{
@@ -199,6 +213,7 @@ var projects = {
 		"dates" : "2002-2013",
 		"description" : "Built series of progressive improvements to a system used for managing employees.  This system was widely deployed in order to take advantage of its many automation features.  This later became 'myworklife'.",
 		"images" : ["images/nexus1.jpg","images/nexus2.jpg"],
+		// url added, in order to have a click on the project name goto a url
 		"url" : "http://att.com/myworklife/"
 	}
 	],
@@ -210,14 +225,14 @@ var projects = {
 
 		// set formatted vars
 		var formattedProjectTitle = HTMLprojectTitle.replace("%data%", projects.projects[projectItemNumber].title);
+		// use url as link
 		var formattedProjectTitle = formattedProjectTitle.replace("#", projects.projects[projectItemNumber].url);
+
 		// append formatted var to last project entry
 		$(".project-entry:last").append(formattedProjectTitle);
-
 		// repeat for dates
 		var formattedProjectDates = HTMLprojectDates.replace("%data%", projects.projects[projectItemNumber].dates);
 		$(".project-entry:last").append(formattedProjectDates);
-
 		// repeat for description
 		var formattedProjectDescription = HTMLprojectDescription.replace("%data%", projects.projects[projectItemNumber].description);
 		$(".project-entry:last").append(formattedProjectDescription);
@@ -320,9 +335,12 @@ displayBrianResume = function() {
 
 	// using jquery.corner.js
 	// gives us rounded rectangles
-	$('#map').corner('10px');
+	$('#map').corner('10px'); // slight rounding on the map
+	// normal rounding for other items
 	$('.biopic,.imgProject,#header,#workExperience,#projects,#education,#letsConnect').corner('20px');
 };
 
 // invoke the display of this resume by invoking the displayBrianResume function
 displayBrianResume();
+
+/* Brian Zuehlke (zell-key), 2015 */
