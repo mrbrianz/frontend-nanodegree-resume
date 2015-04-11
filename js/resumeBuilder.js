@@ -27,11 +27,11 @@ var bio = {
 		var formattedRole       = HTMLheaderRole.replace("%data%", bio.role);
 		var formattedBioPic     = HTMLbioPic.replace("%data%", bio.bioPic);
 		var formattedwelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-		var formattedmobile     = HTMLmobile.replace("%data%", bio.contacts.mobile);
-		var formattedemail      = HTMLemail.replace("%data%", bio.contacts.email);
-		var formattedgithub     = HTMLgithub.replace("%data%", bio.contacts.github);
-		var formattedblog       = HTMLblog.replace("%data%", bio.contacts.blog);
-		var formattedlocation   = HTMLlocation.replace("%data%", bio.contacts.location);
+		var formattedmobile     = HTMLmobile.replace(/%data%/g, bio.contacts.mobile);
+		var formattedemail      = HTMLemail.replace(/%data%/g, bio.contacts.email);
+		var formattedgithub     = HTMLgithub.replace(/%data%/g, bio.contacts.github);
+		var formattedblog       = HTMLblog.replace(/%data%/g, bio.contacts.blog);
+		var formattedlocation   = HTMLlocation.replace(/%data%/g, bio.contacts.location);
 
 		// prepend formatted vars
 		$("#header").prepend(formattedRole);
@@ -131,7 +131,8 @@ var work = {
 		"title" : "Web Developer/Centers Tech Support Manager",
 		"location" : "Austin, TX",
 		"dates" : "2009-Present",
-		"description" : "Responsible for design, development, testing and documentation of the coding and jobs necessary to support management initiatives. Understands computer center infrastructure and environments, tools, and processes; assists with production including loads, source, job scheduling data sets and scripts. Works on several or all technical phases of operations. Ability to employ production system utilities and produce software in one or more programming languages. Directs compilation of records and reports concerning production, machine malfunctioning and maintenance. Possesses and applies a broad knowledge of principles, practices, and procedures to the completion of assignments. Works with minimum supervision. May advise on organizational, procedural, and work flow plans, methods, and procedures analysis. Analyzes the results of monitoring the operating systems and recommends changes to improve processing and utilization. "
+		"description" : "Responsible for design, development, testing and documentation of the coding and jobs necessary to support management initiatives. Understands computer center infrastructure and environments, tools, and processes; assists with production including loads, source, job scheduling data sets and scripts. Works on several or all technical phases of operations. Ability to employ production system utilities and produce software in one or more programming languages. Directs compilation of records and reports concerning production, machine malfunctioning and maintenance. Possesses and applies a broad knowledge of principles, practices, and procedures to the completion of assignments. Works with minimum supervision. May advise on organizational, procedural, and work flow plans, methods, and procedures analysis. Analyzes the results of monitoring the operating systems and recommends changes to improve processing and utilization. ",
+		"url" : "http://www.att.com/"
 
 	},
 	{
@@ -139,21 +140,24 @@ var work = {
 		"title" : "Workforce Systems Manager",
 		"location" : "Austin, TX",
 		"dates" : "2000-2009",
-		"description" : "Provided management of scheduling systems and progressively grew the systems into a Web Application for the benefit of the Austin Call Center, and later to the larger overall company."
+		"description" : "Provided management of scheduling systems and progressively grew the systems into a Web Application for the benefit of the Austin Call Center, and later to the larger overall company.",
+		"url" : "http://www.att.com/"
 	},
 	{
 		"employer" : "Self-Employed",
 		"title" : "Web Developer",
 		"location" : "Waco, TX",
 		"dates" : "1999-2000",
-		"description" : "Created, developed, and maintained business websites for local businesses. Self-employment involved compliance with all laws, ordinances, and taxes necessary for the operation of a business."
+		"description" : "Created, developed, and maintained business websites for local businesses. Self-employment involved compliance with all laws, ordinances, and taxes necessary for the operation of a business.",
+		"url" : "http://bing.com/search?q=waco+tx+web+developer"
 	},
 	{
 		"employer" : "Madagascar United",
 		"title" : "Wildlife Documentary Filmmaker (Just kidding!)",
 		"location" : "Fianarantsoa, Madagascar",
 		"dates" : "1997-1999",
-		"description" : "Directed and Produced several extraordinary films which were never released.  This work experience expands the Google Map so that it looks like I have traveled the world!"
+		"description" : "Directed and Produced several extraordinary films which were never released.  This work experience expands the Google Map so that it looks like I have traveled the world!",
+		"url" : "http://bing.com/search?q=madagascar"
 	}
 	],
 	// work display function
@@ -165,6 +169,8 @@ var work = {
 
 		 	// set formatted vars
 		 	var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[jobItemNumber].employer);
+		 	var formattedEmployer = formattedEmployer.replace("#", work.jobs[jobItemNumber].url);
+
 		 	var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[jobItemNumber].title);
 			var formattedEmployerTitle = formattedEmployer + formattedTitle;
 			var formattedWorkDates = HTMLworkDates.replace("%data%", work.jobs[jobItemNumber].dates);
@@ -184,14 +190,16 @@ var projects = {
 	{
 		"title" : "myWorkLife Mobile",
 		"dates" : "2012-Present",
-		"description" : "Managed and contributed to a mobile version of the Nexus project.",
-		"images" : ["images/mwl1.jpg","images/mwl2.jpg"]
+		"description" : "Managed and contributed to a mobile version of the Nexus project.  This allowed users of the product to interact with the website from their mobile devices.",
+		"images" : ["images/mwl1.jpg","images/mwl2.jpg"],
+		"url" : "http://att.com/myworklife/"
 	},
 	{
 		"title" : "Nexus",
 		"dates" : "2002-2013",
-		"description" : "Built series of progressive improvements to a system used for managing employees.",
-		"images" : ["images/nexus1.jpg","images/nexus2.jpg"]
+		"description" : "Built series of progressive improvements to a system used for managing employees.  This system was widely deployed in order to take advantage of its many automation features.  This later became 'myworklife'.",
+		"images" : ["images/nexus1.jpg","images/nexus2.jpg"],
+		"url" : "http://att.com/myworklife/"
 	}
 	],
 	// projects display function
@@ -202,6 +210,7 @@ var projects = {
 
 		// set formatted vars
 		var formattedProjectTitle = HTMLprojectTitle.replace("%data%", projects.projects[projectItemNumber].title);
+		var formattedProjectTitle = formattedProjectTitle.replace("#", projects.projects[projectItemNumber].url);
 		// append formatted var to last project entry
 		$(".project-entry:last").append(formattedProjectTitle);
 
