@@ -13,15 +13,16 @@ These are HTML strings. As part of the course, you'll be using JavaScript functi
 replace the %data% placeholder text you see in them.
 */
 var HTMLheaderName = '<h1 id="name">%data%</h1>';
-var HTMLheaderRole = '<span>%data%</span><hr/>';
+var HTMLheaderNamePronunciation = '<span class="pronounce">(%data%)</span>';
+var HTMLheaderRole = '<span class="myRole">%data%</span><hr/>';
 
 var HTMLcontactGeneric = '<li class="flex-item"><span class="orange-text">%contact%</span><span class="white-text">%data%</span></li>';
-var HTMLmobile = '<li class="flex-item"><span class="orange-text">mobile</span><span class="white-text">%data%</span></li>';
-var HTMLemail = '<li class="flex-item"><span class="orange-text">email</span><span class="white-text">%data%</span></li>';
-var HTMLtwitter = '<li class="flex-item"><span class="orange-text">twitter</span><span class="white-text">%data%</span></li>';
-var HTMLgithub = '<li class="flex-item"><span class="orange-text">github</span><span class="white-text">%data%</span></li>';
-var HTMLblog = '<li class="flex-item"><span class="orange-text">blog</span><span class="white-text">%data%</span></li>';
-var HTMLlocation = '<li class="flex-item"><span class="orange-text">location</span><span class="white-text">%data%</span></li>';
+var HTMLmobile = '<li class="flex-item"><span class="orange-text">mobile</span><span class="white-text"><a class="myTel" href="tel:%data%">%data%</a></span></li>';
+var HTMLemail = '<li class="flex-item"><span class="orange-text">email</span><span class="white-text"><a class="myEmail" href="mailto:%data%">%data%</a></span></li>';
+var HTMLtwitter = '<li class="flex-item"><span class="orange-text largeScreensOnly">twitter</span><span class="white-text largeScreensOnly">%data%</span></li>';
+var HTMLgithub = '<li class="flex-item"><span class="orange-text largeScreensOnly">github</span><span class="white-text largeScreensOnly"><a class="myGitHub" href="http://github.com/%data%/">%data%</a></span></li>';
+var HTMLblog = '<li class="flex-item"><span class="orange-text myBlog">blog</span><span class="white-text myBlog"><a class="myBlog" href="http://%data%/">%data%</a></span></li>';
+var HTMLlocation = '<li class="flex-item"><span class="orange-text myLocation">location</span><span class="white-text myLocation"><a class="mapLocation" href="https://www.google.com/maps/place/%data%/">%data%</a></span></li>';
 
 var HTMLbioPic = '<img src="%data%" class="biopic">';
 var HTMLwelcomeMsg = '<span class="welcome-message">%data%</span>';
@@ -40,7 +41,7 @@ var HTMLprojectStart = '<div class="project-entry"></div>';
 var HTMLprojectTitle = '<a href="#">%data%</a>';
 var HTMLprojectDates = '<div class="date-text">%data%</div>';
 var HTMLprojectDescription = '<p><br>%data%</p>';
-var HTMLprojectImage = '<img src="%data%">';
+var HTMLprojectImage = '<img class="imgProject" src="%data%">';
 
 var HTMLschoolStart = '<div class="education-entry"></div>';
 var HTMLschoolName = '<a href="#">%data%';
@@ -64,8 +65,8 @@ The International Name challenge in Lesson 2 where you'll create a function that
 */
 $(document).ready(function() {
   $('button').click(function() {
-    var iName = inName() || function(){};
-    $('#name').html(iName);  
+    var iName = inName($("#name").text()) || function(){};
+    $('#name').html(iName);
   });
 });
 
@@ -165,12 +166,13 @@ function initializeMap() {
     // or hover over a pin on a map. They usually contain more information
     // about a location.
     var infoWindow = new google.maps.InfoWindow({
-      content: name
+      content: name // can add here
     });
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
       // your code goes here!
+      infoWindow.open(map, marker);
     });
 
     // this is where the pin actually gets added to the map.
@@ -233,11 +235,11 @@ Uncomment the code below when you're ready to implement a Google Map!
 */
 
 // Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-//window.addEventListener('resize', function(e) {
+window.addEventListener('resize', function(e) {
   // Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
-//});
+  map.fitBounds(mapBounds);
+});/* Brian Zuehlke (zell-key), 2015 */

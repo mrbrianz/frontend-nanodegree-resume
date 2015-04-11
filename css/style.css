@@ -48,6 +48,12 @@ h2, h3, h4, h5 {
   padding-right: 5%;
 }
 
+.pronounce {
+  font-size: 20px;
+  color: #F5A623;
+  line-height: 24px;
+  display: inline;
+}
 
 .date-text {
   font-style: italic;
@@ -79,6 +85,16 @@ a {
   display: block;
 }
 
+.myTel, .myEmail, .myGitHub, .myBlog, .mapLocation {
+  display: inline;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+.myRole {
+  color: #F3F3F3;
+}
+
 .welcome-message {
   font-style: italic;
   font-size: 18px;
@@ -107,6 +123,8 @@ a {
 .gray {
   background-color: #F3F3F3;
   padding-bottom: 10px;
+  margin-left: 2px;
+  margin-right: 2px;
   clear:both;
 }
 
@@ -114,9 +132,20 @@ a {
   background-color: #4A4A4A;
 }
 
+.gray-sweater {
+  background-color: #334948;
+}
+
 /* TODO: Replace with image later */
 #header {
-  background-color: #484848;
+  background-color: #334948;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+#letsConnect {
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .flex-box {
@@ -150,6 +179,11 @@ img {
   padding: 10px;
 }
 
+.imgProject {
+  width: 265px;
+  height: 220px;
+}
+
 /* Bar chart stuff */
 .chart div {
   font: 10px sans-serif;
@@ -176,9 +210,24 @@ span {
   }
 }
 
+@media only screen and (max-width: 950px) {
+  .myLocation {
+    display: none;
+  }
+}
+
 @media only screen and (max-width:900px) {
   .biopic {
     width: 175px;
+  }
+  .myLocation {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 775px) {
+  .myBlog {
+    display: none;
   }
 }
 
@@ -189,10 +238,23 @@ span {
   .biopic {
     width: 150px;
   }
-  .welcome-message {
+  .welcome-message, .pronounce {
     display: none;
   }
 }
+
+@media only screen and (max-width: 650px) {
+  #letsConnect {
+    margin-top: 10%;
+  }
+  .biopic {
+    width: 150px;
+  }
+  .welcome-message, .pronounce, .myRole, .largeScreensOnly {
+    display: none;
+  }
+}
+
 
 #map {
   display: block;
@@ -213,3 +275,4 @@ span {
     display: block;
   }
 }
+/* Brian Zuehlke (zell-key), 2015 */
