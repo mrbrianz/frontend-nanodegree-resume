@@ -16,32 +16,31 @@ var bio = {
 		"location" : "Austin, TX"
 	},
 	"welcomeMessage" : "Building & Developing meaningful web products for use in Business and Customer Services.",
-	"skills" : ["Programming ✔︎", "Coldfusion ✔︎", "Mobile Web ✔︎", "CSS ✔︎", "JavaScript ✔︎"],
+	"skills" : ["Programming ✔︎", "Mobile Web ✔︎", "CSS ✔︎", "JavaScript ✔︎"],
 	"bioPic": "images/me.jpg",
 	// bio display function
 	display : function() {
 
 		// set formatted vars
-		var formattedName = HTMLheaderName.replace("%data%", bio.name);
-		var formattedPronounce = HTMLheaderNamePronunciation.replace("%data%", bio.pronounce);
-		var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
-		var formattedBioPic = HTMLbioPic.replace("%data%", bio.bioPic);
+		var formattedName       = HTMLheaderName.replace("%data%", bio.name);
+		var formattedPronounce  = HTMLheaderNamePronunciation.replace("%data%", bio.pronounce);
+		var formattedRole       = HTMLheaderRole.replace("%data%", bio.role);
+		var formattedBioPic     = HTMLbioPic.replace("%data%", bio.bioPic);
 		var formattedwelcomeMsg = HTMLwelcomeMsg.replace("%data%", bio.welcomeMessage);
-		var formattedmobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-		var formattedemail = HTMLemail.replace("%data%", bio.contacts.email);
-		var formattedgithub = HTMLgithub.replace("%data%", bio.contacts.github);
-		var formattedblog = HTMLblog.replace("%data%", bio.contacts.blog);
-		var formattedlocation = HTMLlocation.replace("%data%", bio.contacts.location);
+		var formattedmobile     = HTMLmobile.replace("%data%", bio.contacts.mobile);
+		var formattedemail      = HTMLemail.replace("%data%", bio.contacts.email);
+		var formattedgithub     = HTMLgithub.replace("%data%", bio.contacts.github);
+		var formattedblog       = HTMLblog.replace("%data%", bio.contacts.blog);
+		var formattedlocation   = HTMLlocation.replace("%data%", bio.contacts.location);
 
 		// prepend formatted vars
 		$("#header").prepend(formattedRole);
 		$("#header").prepend(formattedPronounce);
 		$("#header").prepend(formattedName);
 		// append the rest
-		$("#header").append(formattedBioPic);
-		$("#header").append(formattedwelcomeMsg);
+		$("#header").append(formattedBioPic,formattedwelcomeMsg);
 		// contacts append
-		$("#topContacts").append(formattedmobile,formattedemail,formattedgithub,formattedblog/*,formattedlocation *//* location not desired here, just personal preference */);
+		$("#topContacts").append(formattedmobile,formattedemail,formattedgithub,formattedblog,formattedlocation);
 		$("#footerContacts").append(formattedmobile,formattedemail,formattedgithub,formattedblog,formattedlocation);
 
 		// USING for IN loops
@@ -82,8 +81,8 @@ var education = {
 		{
 			"title" : "Frontend Web Developer Nanodegree",
 			"school" : "Udacity",
-			"date" : 2015,
-			"url" : "http://www.udacity.com"
+			"dates" : 2015,
+			"url" : "https://www.udacity.com/course/nd001"
 		}
 	],
 	// education display function
@@ -93,11 +92,13 @@ var education = {
 			$("#education").append(HTMLschoolStart);
 
 			// set formatted vars
-			var formattedschoolName = HTMLschoolName.replace("%data%", education.schools[schoolitem].name);
-			var formattedschoolDegree = HTMLschoolDegree.replace("%data%", education.schools[schoolitem].degree);
-			var formattedschoolDates = HTMLschoolDates.replace("%data%", education.schools[schoolitem].date);
+			var formattedschoolName 	= HTMLschoolName.replace("%data%", education.schools[schoolitem].name);
+			var formattedschoolName 	= formattedschoolName.replace("#", education.schools[schoolitem].url);
+
+			var formattedschoolDegree 	= HTMLschoolDegree.replace("%data%", education.schools[schoolitem].degree);
+			var formattedschoolDates 	= HTMLschoolDates.replace("%data%", education.schools[schoolitem].dates);
 			var formattedschoolLocation = HTMLschoolLocation.replace("%data%", education.schools[schoolitem].location);
-			var formattedschoolMajor = HTMLschoolMajor.replace('%data%', education.schools[schoolitem].majors);
+			var formattedschoolMajor 	= HTMLschoolMajor.replace('%data%', education.schools[schoolitem].majors);
 
 			// append vars to last education entry
 			$(".education-entry:last").append(formattedschoolName,formattedschoolDegree,formattedschoolDates,formattedschoolLocation,formattedschoolMajor);
@@ -108,9 +109,12 @@ var education = {
 
 		for (onlineItem in education.onlineCourses) {
 			// set formatted vars
-			var formattedonlineTitle = HTMLonlineTitle.replace('%data%', education.onlineCourses[onlineItem].title) + HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineItem].school);
-			var formattedonlineDates = HTMLonlineDates.replace("%data%", education.onlineCourses[onlineItem].dates);
-			var formattedonlineURL = HTMLonlineURL.replace("%data%", education.onlineCourses[onlineItem].url);
+			var formattedonlineTitle 	= HTMLonlineTitle.replace('%data%', education.onlineCourses[onlineItem].title) + HTMLonlineSchool.replace("%data%", education.onlineCourses[onlineItem].school);
+			var formattedonlineTitle 	= formattedonlineTitle.replace("#", education.onlineCourses[onlineItem].url);
+
+			var formattedonlineDates 	= HTMLonlineDates.replace("%data%", education.onlineCourses[onlineItem].dates);
+			var formattedonlineURL 		= HTMLonlineURL.replace("%data%", education.onlineCourses[onlineItem].url);
+			var formattedonlineURL 		= formattedonlineURL.replace("#", education.onlineCourses[onlineItem].url);
 
 			// append vars to last education entry
 			$(".education-entry:last").append(formattedonlineTitle,formattedonlineDates,formattedonlineURL);
