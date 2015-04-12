@@ -210,23 +210,11 @@ span {
   }
 }
 
-@media only screen and (max-width: 950px) {
-  .myLocation {
-    display: none;
-  }
-}
-
-@media only screen and (max-width:900px) {
+@media only screen and (max-width: 915px) {
   .biopic {
     width: 175px;
   }
   .myLocation {
-    display: none;
-  }
-}
-
-@media only screen and (max-width: 775px) {
-  .myBlog {
     display: none;
   }
 }
@@ -238,7 +226,7 @@ span {
   .biopic {
     width: 150px;
   }
-  .welcome-message, .pronounce {
+  .welcome-message, .pronounce, .myBlog {
     display: none;
   }
 }
@@ -250,7 +238,19 @@ span {
   .biopic {
     width: 150px;
   }
-  .welcome-message, .pronounce, .myRole, .largeScreensOnly {
+  .welcome-message, .pronounce, .largeScreensOnly {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  #letsConnect {
+    margin-top: 10%;
+  }
+  .biopic {
+    width: 150px;
+  }
+  .welcome-message, .pronounce, .myRole, .largeScreensOnly, .myBlog {
     display: none;
   }
 }
